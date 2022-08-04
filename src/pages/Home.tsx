@@ -8,7 +8,7 @@ const Home: React.FC = () => {
                 <div className="p-4 w-100">
                     <div className="row">
                         <div className="col-md-12 text-center">
-                            <h1>Facha.Dev API</h1>
+                            <h1>Facha.Dev API (api.facha.dev)</h1>
                             <p>This is an free generic API developed by facha.dev on his free time</p>
                         </div>
                     </div>
@@ -16,6 +16,14 @@ const Home: React.FC = () => {
                         <div className="col-md-12">
                             <h2>Rate Limits</h2>
                             <p>Rate limits are currently not enforce, so please have common sense and dont make me enforce them</p>
+                        </div>
+                    </div>
+                    <div className="row text-center mt-4">
+                        <div className="col-md-12">
+                            <h2>API URL and Versioning</h2>
+                            <p>The API Base URL is <span className="text-bold text-primary">https://api.facha.dev</span>
+                            </p>
+                            <p>Current API version is <span className="text-bold text-primary">v1</span></p>
                         </div>
                     </div>
                     <div className="row">
