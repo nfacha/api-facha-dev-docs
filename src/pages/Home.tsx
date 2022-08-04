@@ -72,6 +72,9 @@ const Home: React.FC = () => {
                                 <div className="card-body">
                                     <h3 className="text-center">Information</h3>
                                     <p>This API Endpoints allow you to get aircraft information</p>
+                                    <div className="alert alert-warning text-center mt-4">
+                                        <span className="text-bold">Cache:</span> All Aircraft (database and live) queries are cached for 60 seconds!
+                                    </div>
                                     <p>Data used in the API is currently sourced from my own database and <a href="https://radar.facha.dev"
                                                                                                              target="_blank">Radar Server</a>
                                     </p>
