@@ -4179,6 +4179,31 @@ const Home: React.FC = () => {
                                                       ]
                                                   }}/>
                                     <EndpointCard method="GET"
+                                                  path="/v1/aircraft/live/callsign/:callsign"
+                                                  description="Get all airborne aircraft with a specific callsign"
+                                                  parameters={[{
+                                                      name: "callsign",
+                                                      description: "Aircraft Callsign"
+                                                  }]}
+                                                  body={null}
+                                                  response={{
+                                                      "aircraft": [
+                                                          {
+                                                              "icao": "497CD8",
+                                                              "altitude": 7100,
+                                                              "geometricAltitude": 7121,
+                                                              "callsign": "SHADW25",
+                                                              "lat": 40.632385,
+                                                              "lon": -7.59436,
+                                                              "heading": 336.9,
+                                                              "speed": 66.3,
+                                                              "squawk": "5625",
+                                                              "ground": false,
+                                                              "military": true
+                                                          }
+                                                      ]
+                                                  }}/>
+                                    <EndpointCard method="GET"
                                                   path="/v1/aircraft/live/type/:typeIcao"
                                                   description="Get all airborne aircraft for a specific ICAO type code"
                                                   parameters={[{name: "typeIcao", description: "ICAO type code"}]}
