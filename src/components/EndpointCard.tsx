@@ -8,6 +8,11 @@ interface EndpointCardProps {
     parameters: { name: string, description: string }[];
     body: any | null;
     response: any | null;
+    rateLimit?: null | {
+        bucket: string;
+        limit: number;
+        timeSeconds: number;
+    }
 }
 
 const EndpointCard: React.FC<EndpointCardProps> = (props: EndpointCardProps) => {
@@ -28,6 +33,19 @@ const EndpointCard: React.FC<EndpointCardProps> = (props: EndpointCardProps) => 
                     <p className="text-center text-bold">{props.description}</p>
                     <hr/>
                     <h4>Method: <span className="text-bold">{props.method}</span></h4>
+                    <h4>Rate Limit:</h4>
+                    {props.rateLimit ?
+                            <div className="mb-2">
+                                <p>Bucket: <span className="text-bold">{props.rateLimit.bucket}</span></p>
+                                <p>Limit: <span className="text-bold">{props.rateLimit.limit}</span> requests, per IP, per <span
+                                        className="text-bold">{props.rateLimit.timeSeconds}</span> seconds</p>
+                                <small>This limit can be increased (for free most of the times) by having a good use case, if you need an increased limit please <a
+                                        href="https://twitter.com/nfacha"
+                                        target="_blank">get in touch</a> and provide additional information</small>
+                            </div>
+                            :
+                            <p className="no-body mb-2">No limit (Please don't make me add one)</p>
+                    }
                     <h4>URL Parameters:</h4>
                     {props.parameters.length > 0 ?
                             <ul>

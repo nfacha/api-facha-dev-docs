@@ -12,15 +12,24 @@ const Home: React.FC = () => {
                             <p>This is an free generic API developed by facha.dev on his free time</p>
                         </div>
                     </div>
-                    <div className="row text-center mt-4">
+                    <div className="rowr mt-4">
                         <div className="col-md-12">
-                            <h2>Rate Limits</h2>
-                            <p>Rate limits are currently not enforce, so please have common sense and dont make me enforce them</p>
+                            <h2 className="text-center">Rate Limits</h2>
+                            <p>To prevent abuse some endpoints are rate limited, information about this will be available bellow in each endpoint documentation</p>
+                            <p>The rate limit uses a <b>fixed window</b> algorithm, this means that your first request within the window stars a timer for X seconds (window size is available bellow on the documentation of each endpoint), at the end of the timer your request count resets.
+                            </p>
+                            <p>Unused requests <b>do not</b> pass on to the next window.</p>
+                            <p>If you exceed your limit you will get a <b>429 Too Many Requests</b> status code.</p>
+                            <p>The response headers for all requests will include two rate limit related headers, if none of this headers are present then the endpoint that you requested is not rate limited:</p>
+                            <p>
+                                <b>X-RateLimit-Remaining</b>: The remaining requests within the current window for this endpoint
+                            </p>
+                            <p><b>X-RateLimit-Reset</b>: How long (in seconds) before your limit resets</p>
                         </div>
                     </div>
-                    <div className="row text-center mt-4">
+                    <div className="row mt-4">
                         <div className="col-md-12">
-                            <h2>API URL and Versioning</h2>
+                            <h2 className="text-center">API URL and Versioning</h2>
                             <p>The API Base URL is <span className="text-bold text-primary">https://api.facha.dev</span>
                             </p>
                             <p>Current API version is <span className="text-bold text-primary">v1</span></p>
@@ -2263,7 +2272,10 @@ const Home: React.FC = () => {
                                     <EndpointCard method="GET"
                                                   path="/v1/aircraft/live/operator/:operatorIcao"
                                                   description="Get all airborne aircraft for an ICAO operator code"
-                                                  parameters={[{name: "operatorIcao", description: "ICAO operator code"}]}
+                                                  parameters={[{
+                                                      name: "operatorIcao",
+                                                      description: "ICAO operator code"
+                                                  }]}
                                                   body={null}
                                                   response={{
                                                       "aircraft": [
