@@ -10,6 +10,10 @@ const Home: React.FC = () => {
                         <div className="col-md-12 text-center">
                             <h1>Facha.Dev API (api.facha.dev)</h1>
                             <p>This is an free generic API developed by facha.dev on his free time</p>
+                            <p>You can find my contact details on <a href="https://facha.dev"
+                                                                     target="_blank">facha.dev</a> if you need any help, or you can join my <a
+                                    href="https://discord.gg/ecyK3y4zTW"
+                                    target="_blank">Discord</a></p>
                         </div>
                     </div>
                     <div className="rowr mt-4">
