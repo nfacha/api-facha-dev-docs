@@ -19,7 +19,7 @@ const Home: React.FC = () => {
                     <div className="rowr mt-4">
                         <div className="col-md-12">
                             <h2 className="text-center">Rate Limits</h2>
-                            <p>To prevent abuse some endpoints are rate limited, information about this will be available bellow in each endpoint documentation</p>
+                            <p>To prevent abuse some endpoints are rate limited (by IP), information about this will be available bellow in each endpoint documentation</p>
                             <p>The rate limit uses a <b>fixed window</b> algorithm, this means that your first request within the window stars a timer for X seconds (window size is available bellow on the documentation of each endpoint), at the end of the timer your request count resets.
                             </p>
                             <p>Unused requests <b>do not</b> pass on to the next window.</p>
@@ -63,7 +63,12 @@ const Home: React.FC = () => {
                                                   description="Check if an email is a temporary email address"
                                                   parameters={[{name: 'domain', description: 'The domain to check'}]}
                                                   body={null}
-                                                  response={{temporary: false}}/>
+                                                  response={{temporary: false}}
+                                                  rateLimit={{
+                                                      bucket: 'temporary-email',
+                                                      limit: 100,
+                                                      timeSeconds: 60
+                                                  }}/>
                                     <EndpointCard method="GET"
                                                   path="/v1/temporary-email/stats"
                                                   description="Get the number of temporary emails in the database and its last update"
@@ -88,9 +93,7 @@ const Home: React.FC = () => {
                                     <div className="alert alert-warning text-center mt-4">
                                         <span className="text-bold">Cache:</span> All Aircraft (database and live) queries are cached for 60 seconds!
                                     </div>
-                                    <p>Data used in the API is currently sourced from my own database and <a href="https://radar.facha.dev"
-                                                                                                             target="_blank">Radar Server</a>
-                                    </p>
+                                    <p>Data used in the API is currently sourced from my own database and my VRS Radar Server </p>
                                     <hr/>
                                     <h3 className="text-center">Endpoints</h3>
                                     <h5 className="text-center">Aircraft Database</h5>
@@ -152,6 +155,11 @@ const Home: React.FC = () => {
                                                   description="Status and position of an airborne Aircraft for a specific ICAO HEX Code"
                                                   parameters={[{name: 'icao', description: 'Aircraft ICAO HEX'}]}
                                                   body={null}
+                                                  rateLimit={{
+                                                      bucket: 'aircraft-live-query',
+                                                      limit: 15,
+                                                      timeSeconds: 60
+                                                  }}
                                                   response={{
                                                       "icao": "4D03CC",
                                                       "altitude": 33025,
@@ -169,6 +177,11 @@ const Home: React.FC = () => {
                                                   description="Status and position of an airborne Aircraft for a specific Registration / Tail Number"
                                                   parameters={[{name: 'reg', description: 'Aircraft registration'}]}
                                                   body={null}
+                                                  rateLimit={{
+                                                      bucket: 'aircraft-live-query',
+                                                      limit: 15,
+                                                      timeSeconds: 60
+                                                  }}
                                                   response={{
                                                       "icao": "4D03CC",
                                                       "altitude": 33025,
@@ -186,6 +199,11 @@ const Home: React.FC = () => {
                                                   description="Status and position of an airborne Aircraft with a specific squawk"
                                                   parameters={[{name: 'squawk', description: 'Aircraft Squawk'}]}
                                                   body={null}
+                                                  rateLimit={{
+                                                      bucket: 'aircraft-live-multiple',
+                                                      limit: 10,
+                                                      timeSeconds: 60
+                                                  }}
                                                   response={{
                                                       "aircraft": [
                                                           {
@@ -234,6 +252,11 @@ const Home: React.FC = () => {
                                                   description="Get live emergency aircraft (Squawk 7500/7600/7700)"
                                                   parameters={[]}
                                                   body={null}
+                                                  rateLimit={{
+                                                      bucket: 'aircraft-live-emergency',
+                                                      limit: 3,
+                                                      timeSeconds: 60
+                                                  }}
                                                   response={{
                                                       "general": [],
                                                       "radioFailure": [],
@@ -252,12 +275,22 @@ const Home: React.FC = () => {
                                                   description="Get live military aircraft squaking NATO Air Policing / QRA (Squawk 1301-1327)"
                                                   parameters={[]}
                                                   body={null}
+                                                  rateLimit={{
+                                                      bucket: 'aircraft-live-nato-qra',
+                                                      limit: 3,
+                                                      timeSeconds: 60
+                                                  }}
                                                   response={null}/>
                                     <EndpointCard method="GET"
                                                   path="/v1/aircraft/live/military"
                                                   description="Get all airborne military aircraft"
                                                   parameters={[]}
                                                   body={null}
+                                                  rateLimit={{
+                                                      bucket: 'aircraft-live-military',
+                                                      limit: 1,
+                                                      timeSeconds: 60
+                                                  }}
                                                   response={[
                                                       {
                                                           "icao": "498453",
@@ -2280,6 +2313,11 @@ const Home: React.FC = () => {
                                                       name: "operatorIcao",
                                                       description: "ICAO operator code"
                                                   }]}
+                                                  rateLimit={{
+                                                      bucket: 'aircraft-live-multiple',
+                                                      limit: 10,
+                                                      timeSeconds: 60
+                                                  }}
                                                   body={null}
                                                   response={{
                                                       "aircraft": [
@@ -4190,6 +4228,11 @@ const Home: React.FC = () => {
                                                       description: "Aircraft Callsign"
                                                   }]}
                                                   body={null}
+                                                  rateLimit={{
+                                                      bucket: 'aircraft-live-multiple',
+                                                      limit: 10,
+                                                      timeSeconds: 60
+                                                  }}
                                                   response={{
                                                       "aircraft": [
                                                           {
@@ -4212,6 +4255,11 @@ const Home: React.FC = () => {
                                                   description="Get all airborne aircraft for a specific ICAO type code"
                                                   parameters={[{name: "typeIcao", description: "ICAO type code"}]}
                                                   body={null}
+                                                  rateLimit={{
+                                                      bucket: 'aircraft-live-multiple',
+                                                      limit: 10,
+                                                      timeSeconds: 60
+                                                  }}
                                                   response={{
                                                       "aircraft": [
                                                           {
@@ -4279,6 +4327,19 @@ const Home: React.FC = () => {
                                                               "military": true
                                                           }
                                                       ]
+                                                  }}/>
+                                    <EndpointCard method="GET"
+                                                  path="/v1/aircraft/live/stats"
+                                                  description="Total aircraft currently being tracked"
+                                                  parameters={[]}
+                                                  body={null}
+                                                  rateLimit={{
+                                                      bucket: 'aircraft-live-stats',
+                                                      limit: 1,
+                                                      timeSeconds: 60
+                                                  }}
+                                                  response={{
+                                                      "liveAircraft": 18815
                                                   }}/>
                                 </div>
                             </div>

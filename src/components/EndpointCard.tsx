@@ -36,7 +36,9 @@ const EndpointCard: React.FC<EndpointCardProps> = (props: EndpointCardProps) => 
                     <h4>Rate Limit:</h4>
                     {props.rateLimit ?
                             <div className="mb-2">
-                                <p>Bucket: <span className="text-bold">{props.rateLimit.bucket}</span></p>
+                                <p>Bucket: <span className="text-bold">{props.rateLimit.bucket}</span>
+                                    <small title="Requests for endpoints within the same bucket count for the same limit">(?)</small>
+                                </p>
                                 <p>Limit: <span className="text-bold">{props.rateLimit.limit}</span> requests, per IP, per <span
                                         className="text-bold">{props.rateLimit.timeSeconds}</span> seconds</p>
                                 <small>This limit can be increased (for free most of the times) by having a good use case, if you need an increased limit please <a
