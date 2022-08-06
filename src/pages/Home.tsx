@@ -12824,19 +12824,6 @@ const Home: React.FC = () => {
                                                       ]
                                                   }}/>
                                     <EndpointCard method="GET"
-                                                  path="/v1/aircraft/live/stats"
-                                                  description="Total aircraft currently being tracked"
-                                                  parameters={[]}
-                                                  body={null}
-                                                  rateLimit={{
-                                                      bucket: 'aircraft-live-stats',
-                                                      limit: 1,
-                                                      timeSeconds: 60
-                                                  }}
-                                                  response={{
-                                                      "liveAircraft": 18815
-                                                  }}/>
-                                    <EndpointCard method="GET"
                                                   path="/v1/aircraft/live/range/:lat/:lon/:range"
                                                   description="Get all aircraft in a range (up to 500km) of a center point"
                                                   parameters={[
@@ -34155,6 +34142,19 @@ const Home: React.FC = () => {
                                                               "military": false
                                                           }
                                                       ]
+                                                  }}/>
+                                    <EndpointCard method="GET"
+                                                  path="/v1/aircraft/live/stats"
+                                                  description="Total aircraft currently being tracked"
+                                                  parameters={[]}
+                                                  body={null}
+                                                  rateLimit={{
+                                                      bucket: 'aircraft-live-stats',
+                                                      limit: 1,
+                                                      timeSeconds: 60
+                                                  }}
+                                                  response={{
+                                                      "liveAircraft": 18815
                                                   }}/>
                                 </div>
                             </div>
