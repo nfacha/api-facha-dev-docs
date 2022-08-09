@@ -90,11 +90,6 @@ const Home: React.FC = () => {
                                 <div className="card-body">
                                     <h3 className="text-center">Information</h3>
                                     <p>This API Endpoints allow you to get aircraft information</p>
-                                    <div className="alert alert-warning text-center mt-4">
-                                        <span className="text-bold">Cache:</span> All Aircraft (database and live) queries are cached for 30 seconds!
-                                        <br/>
-                                        <small>This caching time can be adjusted per user with a valid use case</small>
-                                    </div>
                                     <p>Data used in the API is currently sourced from my own database and my VRS Radar Server </p>
                                     <hr/>
                                     <h3 className="text-center">Endpoints</h3>
@@ -152,7 +147,7 @@ const Home: React.FC = () => {
                                                       "knownAircraft": 436222
                                                   }}/>
                                     <h5 className="text-center mt-2">Live Radar</h5>
-                                    <p className='text-center'><small>Some large queries might sometimes be slower (~1-2s), some changes will address this in the future</small></p>
+                                    <p className="text-center">Please note that the following endpoints can return an array of Aircraft if your query returns multiple results, in cases of a single result an object is returned</p>
                                     <EndpointCard method="GET"
                                                   path="/v1/aircraft/live/icao/:icao"
                                                   description="Status and position of an airborne Aircraft for a specific ICAO HEX Code"
@@ -160,24 +155,22 @@ const Home: React.FC = () => {
                                                   body={null}
                                                   rateLimit={{
                                                       bucket: 'aircraft-live-query',
-                                                      limit: 15,
+                                                      limit: 20,
                                                       timeSeconds: 60
                                                   }}
                                                   response={{
-                                                      "icao": "710112",
-                                                      "reg": "HZ-AK40",
-                                                      "type": "B77W",
-                                                      "callsign": "SVA118",
-                                                      "baroAltitude": 35000,
-                                                      "lat": 49.914871,
-                                                      "lon": 6.011184,
-                                                      "heading": 115,
-                                                      "speed": 507,
+                                                      "icao": "495265",
+                                                      "callsign": "SAT433",
+                                                      "baroAltitude": 17000,
+                                                      "lat": 38.120651,
+                                                      "lon": -26.982901,
+                                                      "heading": 111,
+                                                      "speed": 279,
                                                       "verticalRate": 0,
-                                                      "squawk": "5211",
+                                                      "squawk": "",
                                                       "onGround": false,
                                                       "isMilitary": false,
-                                                      "positionTime": 1659815200002
+                                                      "positionTime": 1660054131210
                                                   }}/>
                                     <EndpointCard method="GET"
                                                   path="/v1/aircraft/live/reg/:reg"
@@ -186,24 +179,22 @@ const Home: React.FC = () => {
                                                   body={null}
                                                   rateLimit={{
                                                       bucket: 'aircraft-live-query',
-                                                      limit: 15,
+                                                      limit: 20,
                                                       timeSeconds: 60
                                                   }}
                                                   response={{
-                                                      "icao": "710112",
-                                                      "reg": "HZ-AK40",
-                                                      "type": "B77W",
-                                                      "callsign": "SVA118",
-                                                      "baroAltitude": 35000,
-                                                      "lat": 49.914871,
-                                                      "lon": 6.011184,
-                                                      "heading": 115,
-                                                      "speed": 507,
+                                                      "icao": "495265",
+                                                      "callsign": "SAT433",
+                                                      "baroAltitude": 17000,
+                                                      "lat": 38.120651,
+                                                      "lon": -26.982901,
+                                                      "heading": 111,
+                                                      "speed": 279,
                                                       "verticalRate": 0,
-                                                      "squawk": "5211",
+                                                      "squawk": "",
                                                       "onGround": false,
                                                       "isMilitary": false,
-                                                      "positionTime": 1659815200002
+                                                      "positionTime": 1660054131210
                                                   }}/>
                                     <EndpointCard method="GET"
                                                   path="/v1/aircraft/live/squawk/:squawk"
@@ -212,43 +203,25 @@ const Home: React.FC = () => {
                                                   body={null}
                                                   rateLimit={{
                                                       bucket: 'aircraft-live-multiple',
-                                                      limit: 10,
+                                                      limit: 15,
                                                       timeSeconds: 60
                                                   }}
-                                                  response={[
-                                                      {
-                                                          "icao": "A8C625",
-                                                          "reg": "N6645J",
-                                                          "type": "P28A",
-                                                          "callsign": "N6645J",
-                                                          "baroAltitude": 0,
-                                                          "lat": 38.726429,
-                                                          "lon": -77.521979,
-                                                          "heading": 318,
-                                                          "speed": 0,
-                                                          "verticalRate": 0,
-                                                          "squawk": "1234",
-                                                          "onGround": true,
-                                                          "isMilitary": false,
-                                                          "positionTime": 1659814824169
-                                                      },
-                                                      {
-                                                          "icao": "495152",
-                                                          "reg": "CS-TJR",
-                                                          "type": "A21N",
-                                                          "callsign": "TAP843",
-                                                          "baroAltitude": 3355392,
-                                                          "lat": 41.101868,
-                                                          "lon": 10.769409,
-                                                          "heading": 217.4,
-                                                          "speed": -371,
-                                                          "verticalRate": 16640,
-                                                          "squawk": "1234",
-                                                          "onGround": false,
-                                                          "isMilitary": false,
-                                                          "positionTime": 1659815289166
-                                                      }
-                                                  ]}/>
+                                                  response={[{
+                                                      "icao": "A5780F",
+                                                      "reg": "N451YX",
+                                                      "type": "E75L",
+                                                      "callsign": "RPA4657",
+                                                      "baroAltitude": 4000,
+                                                      "lat": 40.528839,
+                                                      "lon": -73.478577,
+                                                      "heading": 30.9,
+                                                      "speed": 285,
+                                                      "verticalRate": 0,
+                                                      "squawk": "7600",
+                                                      "onGround": false,
+                                                      "isMilitary": false,
+                                                      "positionTime": 1660054247198
+                                                  }]}/>
                                     <EndpointCard method="GET"
                                                   path="/v1/aircraft/live/emergency"
                                                   description="Get live emergency aircraft (Squawk 7500/7600/7700)"
@@ -256,7 +229,7 @@ const Home: React.FC = () => {
                                                   body={null}
                                                   rateLimit={{
                                                       bucket: 'aircraft-live-emergency',
-                                                      limit: 3,
+                                                      limit: 5,
                                                       timeSeconds: 60
                                                   }}
                                                   response={{
@@ -295,7 +268,7 @@ const Home: React.FC = () => {
                                                   body={null}
                                                   rateLimit={{
                                                       bucket: 'aircraft-live-military',
-                                                      limit: 1,
+                                                      limit: 5,
                                                       timeSeconds: 60
                                                   }}
                                                   response={[
@@ -452,16 +425,9 @@ const Home: React.FC = () => {
                                     <EndpointCard method="GET"
                                                   path="/v1/aircraft/live/stats"
                                                   description="Total aircraft currently being tracked"
-                                                  parameters={[]}
-                                                  body={null}
-                                                  rateLimit={{
-                                                      bucket: 'aircraft-live-stats',
-                                                      limit: 1,
-                                                      timeSeconds: 60
-                                                  }}
-                                                  response={{
-                                                      "liveAircraft": 18815
-                                                  }}/>
+                                                  parameters={[]} body={null} rateLimit={null} response={{
+                                        "liveAircraft": 18815
+                                    }}/>
                                 </div>
                             </div>
                         </div>
