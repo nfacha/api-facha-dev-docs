@@ -85,6 +85,42 @@ const Home: React.FC = () => {
                         <div className="col-md-6">
                             <div className="card">
                                 <div className="card-header">
+                                    <h3 className="text-center">IP Information</h3>
+                                </div>
+                                <div className="card-body">
+                                    <h3 className="text-center">Information</h3>
+                                    <p>This endpoints relate to IP information</p>
+                                    <hr/>
+                                    <h3 className="text-center">Endpoints</h3>
+                                    <EndpointCard method="GET"
+                                                  path="/v1/ip/:ip"
+                                                  description="Check information about an IP, such as location, ASN, and type"
+                                                  parameters={[{name: 'ip', description: 'IP to query'}]}
+                                                  body={null}
+                                                  response={{
+                                                      "ip": "8.8.8.8",
+                                                      "subnet": "8.8.8.0/24",
+                                                      "asn": {
+                                                          "number": 15169,
+                                                          "name": "GOOGLE",
+                                                          "description": "Google"
+                                                      },
+                                                      "country": "US",
+                                                      "hosting": true
+                                                  }}
+                                                  rateLimit={{
+                                                      bucket: 'ip-info',
+                                                      limit: 60,
+                                                      timeSeconds: 60
+                                                  }}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="card">
+                                <div className="card-header">
                                     <h3 className="text-center">Aircraft Database and Radar</h3>
                                 </div>
                                 <div className="card-body">
@@ -233,7 +269,8 @@ const Home: React.FC = () => {
                                                       timeSeconds: 60
                                                   }}
                                                   response={{
-                                                      "general": [{"icao": "495152",
+                                                      "general": [{
+                                                          "icao": "495152",
                                                           "reg": "CS-TJR",
                                                           "type": "A21N",
                                                           "callsign": "TAP843",
@@ -246,7 +283,8 @@ const Home: React.FC = () => {
                                                           "squawk": "7700",
                                                           "onGround": false,
                                                           "isMilitary": false,
-                                                          "positionTime": 1659815289166}],
+                                                          "positionTime": 1659815289166
+                                                      }],
                                                       "radioFailure": [],
                                                       "hijack": []
                                                   }}/>
@@ -272,7 +310,8 @@ const Home: React.FC = () => {
                                                       timeSeconds: 60
                                                   }}
                                                   response={[
-                                                      {"icao": "495152",
+                                                      {
+                                                          "icao": "495152",
                                                           "reg": "CS-TJR",
                                                           "type": "A21N",
                                                           "callsign": "TAP843",
@@ -285,7 +324,8 @@ const Home: React.FC = () => {
                                                           "squawk": "1301",
                                                           "onGround": false,
                                                           "isMilitary": true,
-                                                          "positionTime": 1659815289166}
+                                                          "positionTime": 1659815289166
+                                                      }
                                                   ]}/>
                                     <EndpointCard method="GET"
                                                   path="/v1/aircraft/live/operator/:operatorIcao"
@@ -364,7 +404,10 @@ const Home: React.FC = () => {
                                                   parameters={[
                                                       {name: 'lat', description: 'Latitude'},
                                                       {name: 'lon', description: 'Longitude'},
-                                                      {name: 'range', description: 'Range in KM ,up to 500km (Sorry, no caveman units)'},
+                                                      {
+                                                          name: 'range',
+                                                          description: 'Range in KM ,up to 500km (Sorry, no caveman units)'
+                                                      },
                                                   ]}
                                                   body={null}
                                                   rateLimit={{
@@ -425,9 +468,12 @@ const Home: React.FC = () => {
                                     <EndpointCard method="GET"
                                                   path="/v1/aircraft/live/stats"
                                                   description="Total aircraft currently being tracked"
-                                                  parameters={[]} body={null} rateLimit={null} response={{
-                                        "liveAircraft": 18815
-                                    }}/>
+                                                  parameters={[]}
+                                                  body={null}
+                                                  rateLimit={null}
+                                                  response={{
+                                                      "liveAircraft": 18815
+                                                  }}/>
                                 </div>
                             </div>
                         </div>
