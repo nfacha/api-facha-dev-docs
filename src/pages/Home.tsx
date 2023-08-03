@@ -477,6 +477,169 @@ const Home: React.FC = () => {
                                 </div>
                             </div>
                         </div>
+                        <div className="col-md-6">
+                            <div className="card">
+                                <div className="card-header">
+                                    <h3 className="text-center">Ship Tracking</h3>
+                                </div>
+                                <div className="card-body">
+                                    <h3 className="text-center">Information</h3>
+                                    <p>This API Endpoints allow you to get live ship information</p>
+                                    <hr/>
+                                    <h3 className="text-center">Endpoints</h3>
+                                    <EndpointCard method="GET"
+                                                  path="/v1/ship/:mmsi"
+                                                  description="Get information of a ship by MMSI"
+                                                  parameters={[{name: 'mmsi', description: 'Ship MMSI'}]}
+                                                  body={null}
+                                                  rateLimit={{
+                                                      bucket: 'ship-live',
+                                                      limit: 20,
+                                                      timeSeconds: 60
+                                                  }}
+                                                  response={{
+                                                      "mmsi": 204201370,
+                                                      "timestamp": "2023-08-03 10:52:09 GMT",
+                                                      "longitude": -25.14874,
+                                                      "latitude": 36.94479,
+                                                      "courseOverGround": 25.860000000000003,
+                                                      "speedOverGround": 0,
+                                                      "heading": null,
+                                                      "rateOfTurn": 128,
+                                                      "navigationalStatus": 15,
+                                                      "imoNumber": 0,
+                                                      "name": "SANTO ONOFRE",
+                                                      "callSign": "CUSL8",
+                                                      "type": 0,
+                                                      "dimensionToBow": 6,
+                                                      "dimensionToStern": 10,
+                                                      "dimensionToPort": 3,
+                                                      "dimensionToStarboard": 3,
+                                                      "draught": 0,
+                                                      "destination": "",
+                                                      "estimatedTimeOfArrival": "00-00 24:60"
+                                                  }}/>
+                                    <EndpointCard method="GET"
+                                                  path="/v1/ship/radius/:latitude/:longitude/:radius"
+                                                  description="Get information of all ships in a radius of a center point"
+                                                  parameters={[
+                                                      {name: 'latitude', description: 'Center Point Latitude'},
+                                                      {name: 'longitude', description: 'Center Point Longitude'},
+                                                      {name: 'radius', description: 'Radius in KM ()'}]}
+                                                  body={null}
+                                                  rateLimit={{
+                                                      bucket: 'ship-live',
+                                                      limit: 20,
+                                                      timeSeconds: 60
+                                                  }}
+                                                  response={[]}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="card">
+                                <div className="card-header">
+                                    <h3 className="text-center">Package Tracking</h3>
+                                </div>
+                                <div className="card-body">
+                                    <h3 className="text-center">Information</h3>
+                                    <p>This API Endpoints allow you to get information about mail parcels</p>
+                                    <p>
+                                        <b>WARNING:</b> This endpoint is a very early beta and might be removed at any time
+                                    </p>
+                                    <hr/>
+                                    <h3 className="text-center">Endpoints</h3>
+                                    <EndpointCard method="GET"
+                                                  path="/v1/package/:trackingId"
+                                                  description="Get information of all ships in a radius of a center point"
+                                                  parameters={[
+                                                      {name: 'trackingId', description: 'Tracking ID'}]}
+                                                  body={null}
+                                                  rateLimit={{
+                                                      bucket: 'package-track',
+                                                      limit: 5,
+                                                      timeSeconds: 3600
+                                                  }}
+                                                  response={{
+                                                      "trackingId": "DW4550XXXXXXX",
+                                                      "carrier": {
+                                                          "services": [
+                                                              {
+                                                                  "slug": "portugal-post",
+                                                                  "name": "Portugal Post - Portugal CTT"
+                                                              }
+                                                          ]
+                                                      },
+                                                      "status": "Delivered",
+                                                      "daysInTransit": "5",
+                                                      "eta": [],
+                                                      "events": [
+                                                          {
+                                                              "location": "Centro de Tratamento Ponta Delgada",
+                                                              "date": "2023-07-19T12:47:35Z",
+                                                              "carrier": 0,
+                                                              "status": "Delivered. The shipment has been delivered. The shipping process has ended."
+                                                          },
+                                                          {
+                                                              "location": "Centro de Tratamento Ponta Delgada",
+                                                              "date": "2023-07-19T07:24:36Z",
+                                                              "carrier": 0,
+                                                              "status": "Out for delivery. The shipment has been dispatched for delivery. It will be delivered during the day."
+                                                          },
+                                                          {
+                                                              "location": "PTMRLP - (CO) C.O. LOURES-MARL (OLX)",
+                                                              "date": "2023-07-17T07:44:27Z",
+                                                              "carrier": 0,
+                                                              "status": "In transit. It has left the operational center."
+                                                          },
+                                                          {
+                                                              "location": "Centro de Tratamento Lisboa",
+                                                              "date": "2023-07-17T00:33:22Z",
+                                                              "carrier": 0,
+                                                              "status": "In transit. It has arrived at the operational center."
+                                                          },
+                                                          {
+                                                              "location": "C.O. MADRID J25",
+                                                              "date": "2023-07-14T21:50:30Z",
+                                                              "carrier": 0,
+                                                              "status": "In transit. It has arrived at the operational center."
+                                                          },
+                                                          {
+                                                              "location": "C.O. MADRID J25",
+                                                              "date": "2023-07-14T21:46:28Z",
+                                                              "carrier": 0,
+                                                              "status": "In transit. It has left the operational center."
+                                                          },
+                                                          {
+                                                              "location": "C.O. MADRID J25",
+                                                              "date": "2023-07-14T21:44:33Z",
+                                                              "carrier": 0,
+                                                              "status": "In transit. It has arrived at the operational center."
+                                                          },
+                                                          {
+                                                              "date": "2023-07-14T21:44:32Z",
+                                                              "carrier": 0,
+                                                              "status": "Accepted. The shipment has been accepted. The shipping process has been initiated."
+                                                          },
+                                                          {
+                                                              "location": "999999",
+                                                              "date": "2023-07-14T13:46:32Z",
+                                                              "carrier": 0,
+                                                              "status": "Waiting for entry at CTT. The information about the shipment has been received."
+                                                          },
+                                                          {
+                                                              "date": "2023-07-14T12:21:39Z",
+                                                              "carrier": 0,
+                                                              "status": "Waiting for entry at CTT. The information about the shipment has been received."
+                                                          }
+                                                      ]
+                                                  }}/>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </HomeLayout>
