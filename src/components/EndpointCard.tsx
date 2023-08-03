@@ -42,7 +42,7 @@ const EndpointCard: React.FC<EndpointCardProps> = (props: EndpointCardProps) => 
                                 <p>Limit: <span className="text-bold">{props.rateLimit.limit}</span> requests, per IP, per <span
                                         className="text-bold">{props.rateLimit.timeSeconds}</span> seconds</p>
                                 <small>This limit can be increased (for free most of the times) by having a good use case, if you need an increased limit please <a
-                                        href="https://twitter.com/nfacha"
+                                        href="https://infosec.exchange/@facha"
                                         target="_blank">get in touch</a> and provide additional information</small>
                             </div>
                             :
